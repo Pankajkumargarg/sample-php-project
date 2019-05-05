@@ -23,7 +23,8 @@ stage("Create new tag") {
               sshagent (credentials: ['44d9ae35-ccce-4c7c-8b27-0580fc5a7379'])                        
                 {
                 script {
-                   
+                        sh "git config --add remote.origin.fetch +refs/heads/master:refs/remotes/origin/master"
+                        sh "git fetch"
                         def tag = sh(returnStdout: true, script: "git tag | tail -1").trim()
                         println tag
                         def semVerLib = load 'SemVer.groovy'
