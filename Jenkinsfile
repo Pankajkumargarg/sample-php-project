@@ -19,6 +19,9 @@ stage("Create new tag") {
                expression {env.BRANCH_NAME == 'master'}
             }                     
             steps {
+              
+              sshagent (credentials: ['ba21351b-f6ca-497f-926e-b2726719b7b5'])                        
+                {
                 script {
                    
                         def tag = sh(returnStdout: true, script: "git tag | tail -1").trim()
@@ -38,7 +41,7 @@ stage("Create new tag") {
                 
             }
         }
-
+}
 
   }
 
